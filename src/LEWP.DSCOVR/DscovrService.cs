@@ -5,10 +5,10 @@ using System.Linq;
 using System.Net;
 using System.Threading;
 using LEWP.Common;
+using LEWP.Core;
 
 using Newtonsoft.Json;
 using System.Collections.Generic;
-using LEWP.Core.Properties;
 
 namespace LEWP.DSCOVR
 {
@@ -29,18 +29,18 @@ namespace LEWP.DSCOVR
                 return null;
             }
 
+            _notify(NotifificationType.Info, $"Latest DSCOVR image taken at {imageInfo.Date}");
+
             return AssembleImageFrom(imageInfo);
         }
 
         private ImageInfo GetLatestImageInfo()
         {
-            var date = DateTime.Now.AddDays(-21).ToUniversalTime();
+            var date = DateTime.Now.ToUniversalTime();
             var images = new List<ImageInfo>();
             var tries = 0;
             do
             {
-                tries++;
-                date = date.AddDays(-1);
                 var dateString = date.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
                 var cUrl = $"http://epic.gsfc.nasa.gov/api/images.php?date={dateString}&{Guid.NewGuid()}";
                 try
@@ -60,18 +60,22 @@ namespace LEWP.DSCOVR
                     _notify(NotifificationType.Error, "Unknown error receiving image information: " + ex.Message);
                     throw;
                 }
-            } while (images.Count() == 0 || tries < 10);
+
+                tries++;
+                // Every time we try, go back one day
+                date = date.AddDays(-1);
+            } while (images.Count() == 0 && tries < 10);
 
             if (images.Count() == 0)
             {
                 _notify(NotifificationType.Error, "Could not find any image to set as background.");
                 return null;
             }
-
-            var imgNumber = Settings.Default.ImageNumber - 1;
+            
             ImageInfo img = null;
 
-            if (images.Count <= imgNumber)
+            int imgNumber = Settings.Default.ImageNumber - 1;
+            if (imgNumber < images.Count())
             {
                 img = images[imgNumber];
             }

@@ -8,9 +8,9 @@ using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using LEWP.Common;
+using LEWP.Core;
 
 using Newtonsoft.Json;
-using LEWP.Core.Properties;
 
 namespace LEWP.Himawari
 {
@@ -31,6 +31,11 @@ namespace LEWP.Himawari
             {
                 return null;
             }
+
+            var ts = imageInfo.TimeString;
+            var sensibleTimeString = ts.Substring(0, 10) + " " + ts.Substring(11, 2) + ":" + ts.Substring(13, 2) + ":" + ts.Substring(15, 2);
+            
+            _notify(NotifificationType.Info, $"Latest Himawari image taken at {sensibleTimeString}");
 
             var image = AssembleImageFrom(imageInfo);
 

@@ -72,6 +72,7 @@ namespace LEWP.Core
             var win = new FormSettings();
             win.ShowDialog();
             Settings.Default.Reload();
+            _orchestrator.ForceStart();
         }
 
         private void OnMenuOpening(object sender, CancelEventArgs e)

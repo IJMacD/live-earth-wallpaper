@@ -32,25 +32,30 @@
             this.BtnClose = new System.Windows.Forms.Button();
             this.BtnSave = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtDifference = new System.Windows.Forms.NumericUpDown();
+            this.label3 = new System.Windows.Forms.Label();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.txtImageNumber = new System.Windows.Forms.NumericUpDown();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.ComboSat = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txtInterval = new System.Windows.Forms.NumericUpDown();
-            this.label5 = new System.Windows.Forms.Label();
-            this.ComboSat = new System.Windows.Forms.ComboBox();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtDifference = new System.Windows.Forms.NumericUpDown();
-            this.label3 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtInterval)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtDifference)).BeginInit();
+            this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtImageNumber)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtInterval)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -58,7 +63,7 @@
             this.panel1.Controls.Add(this.BtnClose);
             this.panel1.Controls.Add(this.BtnSave);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(4, 293);
+            this.panel1.Location = new System.Drawing.Point(4, 236);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(226, 46);
             this.panel1.TabIndex = 0;
@@ -92,10 +97,136 @@
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(4, 72);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(226, 221);
+            this.groupBox2.Size = new System.Drawing.Size(226, 164);
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Sattellite:";
+            this.groupBox2.Text = "Satellite:";
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.AccessibleName = "";
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.tabControl1.Location = new System.Drawing.Point(3, 61);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(220, 100);
+            this.tabControl1.TabIndex = 10;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.label4);
+            this.tabPage1.Controls.Add(this.txtDifference);
+            this.tabPage1.Controls.Add(this.label3);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(212, 74);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Delay";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(73, 37);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(121, 13);
+            this.label4.TabIndex = 5;
+            this.label4.Text = "hours (0 means realtime)";
+            // 
+            // txtDifference
+            // 
+            this.txtDifference.Location = new System.Drawing.Point(21, 35);
+            this.txtDifference.Maximum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.txtDifference.Minimum = new decimal(new int[] {
+            23,
+            0,
+            0,
+            -2147483648});
+            this.txtDifference.Name = "txtDifference";
+            this.txtDifference.Size = new System.Drawing.Size(46, 20);
+            this.txtDifference.TabIndex = 4;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(18, 19);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(83, 13);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "Time difference:";
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.label7);
+            this.tabPage2.Controls.Add(this.txtImageNumber);
+            this.tabPage2.Controls.Add(this.label6);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(212, 74);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Image";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // txtImageNumber
+            // 
+            this.txtImageNumber.Location = new System.Drawing.Point(9, 19);
+            this.txtImageNumber.Maximum = new decimal(new int[] {
+            11,
+            0,
+            0,
+            0});
+            this.txtImageNumber.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.txtImageNumber.Name = "txtImageNumber";
+            this.txtImageNumber.Size = new System.Drawing.Size(120, 20);
+            this.txtImageNumber.TabIndex = 1;
+            this.txtImageNumber.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.txtImageNumber.ValueChanged += new System.EventHandler(this.OnChange);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(6, 3);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(76, 13);
+            this.label6.TabIndex = 0;
+            this.label6.Text = "Image Number";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(9, 19);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(84, 13);
+            this.label5.TabIndex = 9;
+            this.label5.Text = "Source Satellite:";
+            // 
+            // ComboSat
+            // 
+            this.ComboSat.FormattingEnabled = true;
+            this.ComboSat.Items.AddRange(new object[] {
+            "NASA DSCOVR",
+            "Himawari-8"});
+            this.ComboSat.Location = new System.Drawing.Point(12, 35);
+            this.ComboSat.Name = "ComboSat";
+            this.ComboSat.Size = new System.Drawing.Size(202, 21);
+            this.ComboSat.TabIndex = 8;
+            this.ComboSat.SelectedIndexChanged += new System.EventHandler(this.OnChange);
             // 
             // groupBox1
             // 
@@ -155,100 +286,20 @@
             0,
             0});
             // 
-            // label5
+            // label7
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(9, 19);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(87, 13);
-            this.label5.TabIndex = 9;
-            this.label5.Text = "Source Sattellite:";
-            // 
-            // ComboSat
-            // 
-            this.ComboSat.FormattingEnabled = true;
-            this.ComboSat.Items.AddRange(new object[] {
-            "Himawari-8",
-            "NASA DSCOVR"});
-            this.ComboSat.Location = new System.Drawing.Point(12, 35);
-            this.ComboSat.Name = "ComboSat";
-            this.ComboSat.Size = new System.Drawing.Size(202, 21);
-            this.ComboSat.TabIndex = 8;
-            // 
-            // tabControl1
-            // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tabControl1.Location = new System.Drawing.Point(3, 118);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(220, 100);
-            this.tabControl1.TabIndex = 10;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Controls.Add(this.label4);
-            this.tabPage1.Controls.Add(this.txtDifference);
-            this.tabPage1.Controls.Add(this.label3);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(212, 74);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(192, 74);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(73, 37);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(121, 13);
-            this.label4.TabIndex = 5;
-            this.label4.Text = "hours (0 means realtime)";
-            // 
-            // txtDifference
-            // 
-            this.txtDifference.Location = new System.Drawing.Point(21, 35);
-            this.txtDifference.Maximum = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.txtDifference.Minimum = new decimal(new int[] {
-            23,
-            0,
-            0,
-            -2147483648});
-            this.txtDifference.Name = "txtDifference";
-            this.txtDifference.Size = new System.Drawing.Size(46, 20);
-            this.txtDifference.TabIndex = 4;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(18, 19);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(83, 13);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "Time difference:";
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(6, 42);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(80, 13);
+            this.label7.TabIndex = 2;
+            this.label7.Text = "(DSCOVR only)";
             // 
             // FormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(234, 343);
+            this.ClientSize = new System.Drawing.Size(234, 286);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.panel1);
@@ -262,13 +313,16 @@
             this.panel1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtInterval)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtDifference)).EndInit();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtImageNumber)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtInterval)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -285,11 +339,14 @@
         private System.Windows.Forms.NumericUpDown txtInterval;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox ComboSat;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.NumericUpDown txtDifference;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.NumericUpDown txtImageNumber;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
     }
 }

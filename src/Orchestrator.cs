@@ -2,8 +2,9 @@
 using System.Threading;
 using System.Threading.Tasks;
 using LEWP.Common;
-using LEWP.Core.Properties;
+
 using LEWP.DSCOVR;
+using LEWP.Himawari;
 
 namespace LEWP.Core
 {
@@ -26,7 +27,7 @@ namespace LEWP.Core
                 if (imageFile != null)
                 {
                     Wallpaper.Set(imageFile, Wallpaper.Style.Fit);
-                }               
+                }
 
                 if (Settings.Default.Interval <= 0)
                 {
@@ -57,6 +58,9 @@ namespace LEWP.Core
                     service = new DscovrService(_notify);
                     break;
                 case 1:
+                    service = new HimawariService(_notify);
+                    break;
+                case 2:
                     throw new NotImplementedException();
             }
 
