@@ -2,7 +2,8 @@
 {
     public enum ImageSources
     {
+        Himawari = 0,
         DSCOVR = 1,
-        Himawari = 0
+        APOD = 2
     }
 }

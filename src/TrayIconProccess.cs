@@ -9,7 +9,6 @@ using System.Windows.Forms;
 
 using LEWP.Common;
 using LEWP.Core.Properties;
-using LEWP.Himawari;
 
 namespace LEWP.Core
 {

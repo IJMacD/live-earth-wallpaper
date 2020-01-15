@@ -5,6 +5,7 @@ using LEWP.Common;
 
 using LEWP.DSCOVR;
 using LEWP.Himawari;
+using LEWP.APOD;
 
 namespace LEWP.Core
 {
@@ -12,6 +13,11 @@ namespace LEWP.Core
     {
         private readonly Action<NotifificationType, string> _notify;
         private CancellationTokenSource _internalTokenSource;
+
+        public Orchestrator()
+        {
+            _notify = null;
+        }
 
         public Orchestrator(Action<NotifificationType, string> notify)
         {
@@ -22,12 +28,7 @@ namespace LEWP.Core
         {
             while (!token.IsCancellationRequested)
             {
-                var service = ServiceFactory();
-                var imageFile = service?.GetImage(token);
-                if (imageFile != null)
-                {
-                    Wallpaper.Set(imageFile, Wallpaper.Style.Fit);
-                }
+                RunOnce(token);
 
                 if (Settings.Default.Interval <= 0)
                 {
@@ -54,17 +55,39 @@ namespace LEWP.Core
             IImageSource service = null;
             switch (Settings.Default.Source)
             {
-                case 0:
+                case (int)ImageSources.DSCOVR:
                     service = new DscovrService(_notify);
                     break;
-                case 1:
+                case (int)ImageSources.Himawari:
                     service = new HimawariService(_notify);
                     break;
-                case 2:
+                case (int)ImageSources.APOD:
+                    service = new APODService(_notify);
+                    break;
+                default:
                     throw new NotImplementedException();
             }
 
             return service;
+        }
+
+        public void RunOnce (CancellationToken token)
+        {
+            var service = ServiceFactory();
+            var imageFile = service?.GetImage(token);
+            if (imageFile != null)
+            {
+                Wallpaper.Style style = Wallpaper.Style.Fill;
+                if (Settings.Default.WallpaperStyle == 0)
+                {
+                    style = Wallpaper.Style.Fill;
+                }
+                else if (Settings.Default.WallpaperStyle == 1)
+                {
+                    style = Wallpaper.Style.Fit;
+                }
+                Wallpaper.Set(imageFile, style);
+            }
         }
 
         public void ForceStart()

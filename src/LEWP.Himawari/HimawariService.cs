@@ -8,15 +8,13 @@ using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using LEWP.Common;
-using LEWP.Core;
-
 using Newtonsoft.Json;
 
 namespace LEWP.Himawari
 {
     public class HimawariService : IImageSource
     {
-        private readonly Action<NotifificationType, string> _notify;
+        private readonly Action<NotifificationType, string> _notify = null;
 
         public HimawariService(Action<NotifificationType, string> notify)
         {
@@ -35,7 +33,7 @@ namespace LEWP.Himawari
             var ts = imageInfo.TimeString;
             var sensibleTimeString = ts.Substring(0, 10) + " " + ts.Substring(11, 2) + ":" + ts.Substring(13, 2) + ":" + ts.Substring(15, 2);
             
-            _notify(NotifificationType.Info, $"Latest Himawari image taken at {sensibleTimeString}");
+            _notify?.Invoke(NotifificationType.Info, $"Latest Himawari image taken at {sensibleTimeString}");
 
             var image = AssembleImageFrom(imageInfo);
 
@@ -62,11 +60,11 @@ namespace LEWP.Himawari
             }
             catch (WebException ex)
             {
-                _notify(NotifificationType.Error, "Error receiving image information: " + ex.Message);
+                _notify?.Invoke(NotifificationType.Error, "Error receiving image information: " + ex.Message);
             }
             catch (Exception ex)
             {
-                _notify(NotifificationType.Error, "Unknown error receiving image information: " + ex.Message);
+                _notify?.Invoke(NotifificationType.Error, "Unknown error receiving image information: " + ex.Message);
                 throw;
             }
 
@@ -105,11 +103,11 @@ namespace LEWP.Himawari
             }
             catch (WebException ex)
             {
-                _notify(NotifificationType.Error, "Error downloading image: " + ex.Message);
+                _notify?.Invoke(NotifificationType.Error, "Error downloading image: " + ex.Message);
             }
             catch (Exception ex)
             {
-                _notify(NotifificationType.Error, "Unknown error downloading image: " + ex.Message);
+                _notify?.Invoke(NotifificationType.Error, "Unknown error downloading image: " + ex.Message);
                 throw;
             }
 
@@ -135,7 +133,7 @@ namespace LEWP.Himawari
             }
             catch (Exception ex)
             {
-                _notify(NotifificationType.Error, "Error saving the image: " + ex.Message);
+                _notify?.Invoke(NotifificationType.Error, "Error saving the image: " + ex.Message);
                 throw;
             }
             finally

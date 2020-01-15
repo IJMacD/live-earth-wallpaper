@@ -7,15 +7,14 @@ using System.Threading;
 using LEWP.Common;
 
 using Newtonsoft.Json;
-using System.Collections.Generic;
 
-namespace LEWP.DSCOVR
+namespace LEWP.APOD
 {
-    public class DscovrService : IImageSource
+    public class APODService : IImageSource
     {
         private readonly Action<NotifificationType, string> _notify;
 
-        public DscovrService(Action<NotifificationType, string> notify)
+        public APODService(Action<NotifificationType, string> notify)
         {
             _notify = notify;
         }
@@ -28,26 +27,25 @@ namespace LEWP.DSCOVR
                 return null;
             }
 
-            _notify?.Invoke(NotifificationType.Info, $"Latest DSCOVR image taken at {imageInfo.Date}");
-
             return AssembleImageFrom(imageInfo);
         }
 
         private ImageInfo GetLatestImageInfo()
         {
             var date = DateTime.Now.ToUniversalTime();
-            var images = new List<ImageInfo>();
+            ImageInfo image = null;
             var tries = 0;
             do
             {
+                tries++;
                 var dateString = date.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
-                var cUrl = $"http://epic.gsfc.nasa.gov/api/images.php?date={dateString}&{Guid.NewGuid()}";
+                var cUrl = $"https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&date={dateString}";
                 try
                 {
                     using (var wc = new WebClient())
                     {
                         var json = wc.DownloadString(cUrl);
-                        images = JsonConvert.DeserializeObject<List<ImageInfo>>(json);
+                        image = JsonConvert.DeserializeObject<ImageInfo>(json);
                     }
                 }
                 catch (WebException ex)
@@ -59,37 +57,22 @@ namespace LEWP.DSCOVR
                     _notify?.Invoke(NotifificationType.Error, "Unknown error receiving image information: " + ex.Message);
                     throw;
                 }
-
-                tries++;
-                // Every time we try, go back one day
                 date = date.AddDays(-1);
-            } while (images.Count() == 0 && tries < 10);
+            } while ((image == null || image.Media_type != "image") && tries < 10);
 
-            if (images.Count() == 0)
+            if (image == null)
             {
                 _notify?.Invoke(NotifificationType.Error, "Could not find any image to set as background.");
                 return null;
             }
 
-            int imgNumber = Settings.Default.ImageNumber - 1;
-
-            ImageInfo img;
-            if (imgNumber < images.Count())
-            {
-                img = images[imgNumber];
-            }
-            else
-            {
-                img = images.Last();
-            }
-
-            return img;
+            return image;
         }
 
         private string AssembleImageFrom(ImageInfo imageInfo)
         {
-            var url = $"http://epic.gsfc.nasa.gov/epic-archive/jpg/{imageInfo.Image}.jpg";
-            var pathName = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures) + @"\Earth\dscovr-latest.jpg";
+            var url = imageInfo.Hdurl;
+            var pathName = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures) + @"\Earth\apod-latest.jpg";
             try
             {
                 if (!Directory.Exists(Path.GetDirectoryName(pathName)))
