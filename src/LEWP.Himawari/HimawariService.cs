@@ -30,7 +30,9 @@ namespace LEWP.Himawari
                 return null;
             }
 
-            _notify?.Invoke(NotifificationType.Info, $"Latest Himawari image taken at {imageInfo.Date}");
+            var local = imageInfo.Date.ToLocalTime();
+
+            _notify?.Invoke(NotifificationType.Info, $"Latest Himawari image taken at {local}");
 
             var image = AssembleImageFrom(imageInfo);
 
@@ -51,7 +53,9 @@ namespace LEWP.Himawari
                         Width = 550,
                         Level = "4d",
                         NumBlocks = 4,
-                        Date = iInfo.Date.AddHours(Settings.Default.Difference),
+                        // ImageInfo.Date is DateTime in UTC so convert to DateTimeOffset
+                        // with correct offset.
+                        Date = new DateTimeOffset(iInfo.Date, TimeSpan.Zero),
                     };
                 }
             }

@@ -7,6 +7,6 @@ namespace LEWP.Himawari
         public int Width { get; set; }
         public string Level { get; set; }
         public int NumBlocks { get; set; }
-        public DateTime Date { get; set; }
+        public DateTimeOffset Date { get; set; }
     }
 }

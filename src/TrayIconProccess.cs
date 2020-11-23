@@ -70,8 +70,6 @@ namespace LEWP.Core
         {
             var win = new FormSettings();
             win.ShowDialog();
-            Settings.Default.Reload();
-            _orchestrator.ForceStart();
         }
 
         private void OnMenuOpening(object sender, CancelEventArgs e)
@@ -117,10 +115,14 @@ namespace LEWP.Core
 
         private void Notify(NotifificationType type, string message)
         {
+            // In order to *replace* the notification we need to hide it first
+            _trayIcon.Visible = false;
+
             _trayIcon.BalloonTipText = message;
             _trayIcon.BalloonTipIcon = type == NotifificationType.Error
                 ? ToolTipIcon.Error
                 : (type == NotifificationType.Warning ? ToolTipIcon.Warning : ToolTipIcon.Info);
+            _trayIcon.Visible = true;
             _trayIcon.ShowBalloonTip(6000);
         }
     }
