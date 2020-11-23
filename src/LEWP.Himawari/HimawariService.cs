@@ -30,10 +30,7 @@ namespace LEWP.Himawari
                 return null;
             }
 
-            var ts = imageInfo.TimeString;
-            var sensibleTimeString = ts.Substring(0, 10) + " " + ts.Substring(11, 2) + ":" + ts.Substring(13, 2) + ":" + ts.Substring(15, 2);
-            
-            _notify?.Invoke(NotifificationType.Info, $"Latest Himawari image taken at {sensibleTimeString}");
+            _notify?.Invoke(NotifificationType.Info, $"Latest Himawari image taken at {imageInfo.Date}");
 
             var image = AssembleImageFrom(imageInfo);
 
@@ -54,7 +51,7 @@ namespace LEWP.Himawari
                         Width = 550,
                         Level = "4d",
                         NumBlocks = 4,
-                        TimeString = iInfo.Date.AddHours(Settings.Default.Difference).ToString("yyyy/MM/dd/HHmmss", CultureInfo.InvariantCulture)
+                        Date = iInfo.Date.AddHours(Settings.Default.Difference),
                     };
                 }
             }
@@ -73,7 +70,8 @@ namespace LEWP.Himawari
 
         private Bitmap AssembleImageFrom(ImageSettings imageInfo)
         {
-            var url = $"https://himawari8-dl.nict.go.jp/himawari8/img/D531106/{imageInfo.Level}/{imageInfo.Width}/{imageInfo.TimeString}";
+            var timeString = imageInfo.Date.ToString("yyyy/MM/dd/HHmmss", CultureInfo.InvariantCulture);
+            var url = $"https://himawari8-dl.nict.go.jp/himawari8/img/D531106/{imageInfo.Level}/{imageInfo.Width}/{timeString}";
             var finalImage = new Bitmap(imageInfo.Width*imageInfo.NumBlocks, imageInfo.Width*imageInfo.NumBlocks + 100);
             var canvas = Graphics.FromImage(finalImage);
             canvas.Clear(Color.Black);

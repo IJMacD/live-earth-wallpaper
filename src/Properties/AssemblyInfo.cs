@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Live Earth Wallpaper")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Luiz Henrique Miranda")]
+[assembly: AssemblyCompany("IJMacD")]
 [assembly: AssemblyProduct("Live Earth Wallpaper")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
